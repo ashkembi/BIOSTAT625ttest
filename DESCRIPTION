@@ -15,6 +15,7 @@ Suggests:
     knitr,
     rmarkdown,
     testthat (>= 3.0.0),
-    stats
+    stats,
+    covr
 VignetteBuilder: knitr
 Config/testthat/edition: 3
