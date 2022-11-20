@@ -2,14 +2,14 @@
 # Generator token: 10BE3573-1514-4C36-9D1C-5A225CD40393
 
 length_cpp <- function(x) {
-    .Call('_BIOSTAT625ttest_length_cpp', PACKAGE = 'BIOSTAT625ttest', x)
+    .Call(`_BIOSTAT625ttest_length_cpp`, x)
 }
 
 mean_cpp <- function(x) {
-    .Call('_BIOSTAT625ttest_mean_cpp', PACKAGE = 'BIOSTAT625ttest', x)
+    .Call(`_BIOSTAT625ttest_mean_cpp`, x)
 }
 
 sd_cpp <- function(x) {
-    .Call('_BIOSTAT625ttest_sd_cpp', PACKAGE = 'BIOSTAT625ttest', x)
+    .Call(`_BIOSTAT625ttest_sd_cpp`, x)
 }
 

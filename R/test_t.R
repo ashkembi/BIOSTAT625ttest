@@ -1,17 +1,3 @@
-# Hello, world!
-#
-# This is an example function named 'hello'
-# which prints 'Hello, world!'.
-#
-# You can learn more about package authoring with RStudio at:
-#
-#   http://r-pkgs.had.co.nz/
-#
-# Some useful keyboard shortcuts for package authoring:
-#
-#   Install Package:           'Cmd + Shift + B'
-#   Check Package:             'Cmd + Shift + E'
-#   Test Package:              'Cmd + Shift + T'
 
 #' @title One-sample Student's t-test
 #' @description Performs one sample t-tests on vectors of data.
@@ -19,7 +5,6 @@
 #' @param h0 a number indicating the true value of the mean (null hypothesis).
 #' @param alternative a character string specifying the alternative hypothesis; must be one of "two.sided" (default), "greater", or "less".
 #' @param conf.level confidence level of the interval
-#' @param decimals a number indicating the number of digits to round to
 #' @return A summary of the t-test and a list with class "ttest" containing the following components:
 #' \itemize{
 #' \item statistic - statistic the value of the t-statistic
@@ -32,14 +17,26 @@
 #' \item alternative - a character string describing the alternative hypothesis
 #' \item method - a character string indicating what type of t-test was performed
 #' \item data.name - a character string giving the name of the data
-#' \item round - the number of digits used for rounding
 #' }
 #' @examples
-#' test_t(1:10)           # P = 0.0003
-#' test_t(1:10, h0 = 5)   # P = 0.6141
+#' ## Examples for a two-sided t-test
+#' ## That is, true mean is equal to the null hypothesis (h0)
+#' test_t(1:10)           # P = 0.0002782
+#' ## Changing the null hypothesis to 5
+#' test_t(1:10, h0 = 5)   # P = 0.6141, not significant
+#'
+#' ## Examples for a one-sided t-test
+#' ## First case, true mean is less than the null hypothesis
+#' test_t(1:10, alternative = "less")    # P = 0.9999
+#' ## Second case, true mean is greater than the null hypothesis
+#' test_t(1:10, alternative = "greater")  # P = 0.0001391
+#'
+#' ## Example of different confidence levels
+#' test_t(1:10, h0 = 5, conf.level = 0.9)
+#' test_t(1:10, h0 = 5, conf.level = 0.99)
 
 test_t <- function(x, h0 = 0, alternative = c("two.sided", "less", "greater"),
-                   conf.level = 0.95, decimals = 4) {
+                   conf.level = 0.95) {
 
   alternative <- match.arg(alternative)
 
@@ -96,18 +93,18 @@ test_t <- function(x, h0 = 0, alternative = c("two.sided", "less", "greater"),
 
   conf.int <- c(ll, ul)
 
-  names(t) <- "t-statistic"
+  names(t) <- "t"
   names(df) <- "df"
-  names(h0) <-"null hypothesis"
+  names(h0) <-"mean"
   attr(conf.int,"conf.level") <- conf.level
+  names(x_mean) <- "mean of x"
 
   rval <- list(statistic = t, parameter = df, p.value = p.value,
                conf.int = conf.int, estimate = x_mean, null.value = h0,
                stderr = x_std_err,
-               alternative = paste0("alternative hypothesis: true mean is", p.value.compare, h0),
-               method = "One Sample t-test", data.name = deparse(substitute(x)),
-               round = decimals)
-  class(rval) <- "ttest"
+               alternative = alternative,
+               method = "One Sample t-test", data.name = deparse(substitute(x)))
+  class(rval) <- "htest"
 
   return(rval)
 

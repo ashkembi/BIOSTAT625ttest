@@ -8,8 +8,7 @@ test_t(
   x,
   h0 = 0,
   alternative = c("two.sided", "less", "greater"),
-  conf.level = 0.95,
-  decimals = 4
+  conf.level = 0.95
 )
 }
 \arguments{
@@ -20,8 +19,6 @@ test_t(
 \item{alternative}{a character string specifying the alternative hypothesis; must be one of "two.sided" (default), "greater", or "less".}
 
 \item{conf.level}{confidence level of the interval}
-
-\item{decimals}{a number indicating the number of digits to round to}
 }
 \value{
 A summary of the t-test and a list with class "ttest" containing the following components:
@@ -35,13 +32,26 @@ A summary of the t-test and a list with class "ttest" containing the following c
 \item stderr - the standard error of the mean, used as a denominator in the t-statistic formula
 \item alternative - a character string describing the alternative hypothesis
 \item method - a character string indicating what type of t-test was performed
-\item a character string giving the name of the data
+\item data.name - a character string giving the name of the data
 }
 }
 \description{
 Performs one sample t-tests on vectors of data.
 }
 \examples{
-test_t(1:10)           # P = 0.0003
-test_t(1:10, h0 = 5)   # P = 0.6141
+## Examples for a two-sided t-test
+## That is, true mean is equal to the null hypothesis (h0)
+test_t(1:10)           # P = 0.0002782
+## Changing the null hypothesis to 5
+test_t(1:10, h0 = 5)   # P = 0.6141, not significant
+
+## Examples for a one-sided t-test
+## First case, true mean is less than the null hypothesis
+test_t(1:10, alternative = "less")    # P = 0.9999
+## Second case, true mean is greater than the null hypothesis
+test_t(1:10, alternative = "greater")  # P = 0.0001391
+
+## Example of different confidence levels
+test_t(1:10, h0 = 5, conf.level = 0.9)
+test_t(1:10, h0 = 5, conf.level = 0.99)
 }
