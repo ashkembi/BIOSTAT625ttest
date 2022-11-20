@@ -1,11 +1,17 @@
 #include <Rcpp.h>
 using namespace Rcpp;
 
+//' Finds the length of a vector (or array)
+//'
+//' @param x Numeric vector in R
 // [[Rcpp::export]]
 int length_cpp(NumericVector x) {
   return x.size();
 }
 
+//' Finds the mean of a vector
+//'
+//' @param x Numeric vector in R
 // [[Rcpp::export]]
 float mean_cpp(NumericVector x) {
   double n = length_cpp(x);
@@ -21,6 +27,9 @@ float mean_cpp(NumericVector x) {
   return mean;
 }
 
+//' Finds the standard deviation of a vector (or array)
+//'
+//' @param x Numeric vector in R
 // [[Rcpp::export]]
 float sd_cpp(NumericVector x) {
   double n = length_cpp(x);

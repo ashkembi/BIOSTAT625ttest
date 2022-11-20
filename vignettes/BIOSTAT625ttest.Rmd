@@ -130,7 +130,7 @@ You can also run a one-sample t-test using the original R function `stats::t.tes
 
 ```{r}
 ## two-tailed t-test using original R function
-original.t <- t.test(x, mu = 90, alternative = "two.sided", conf.level = 0.95)
+original.t <- stats::t.test(x, mu = 90, alternative = "two.sided", conf.level = 0.95)
 original.t
 
 # t-statistic

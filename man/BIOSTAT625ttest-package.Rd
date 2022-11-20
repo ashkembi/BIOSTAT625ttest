@@ -4,8 +4,8 @@
 \name{BIOSTAT625ttest-package}
 \alias{BIOSTAT625ttest}
 \alias{BIOSTAT625ttest-package}
-\title{BIOSTAT625ttest: What the Package Does (Title Case)}
+\title{BIOSTAT625ttest: A one-sample, Student's t-test}
 \description{
-More about what it does (maybe more than one line) Use four spaces when indenting paragraphs within the Description.
+This test package has a simple function to run one-sample t-test.
 }
 \keyword{internal}

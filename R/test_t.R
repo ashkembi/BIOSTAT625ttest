@@ -66,27 +66,27 @@ test_t <- function(x, h0 = 0, alternative = c("two.sided", "less", "greater"),
 
   if (alternative == "two.sided") {
     alpha <- 1-conf.level
-    ll <- x_mean + qt(alpha-(alpha/2), df)*x_std_err
-    ul <- x_mean + qt(conf.level+(alpha/2), df)*x_std_err
+    ll <- x_mean + stats::qt(alpha-(alpha/2), df)*x_std_err
+    ul <- x_mean + stats::qt(conf.level+(alpha/2), df)*x_std_err
 
     # calculate p-value
-    p.value <- pt(-abs(t), df, lower.tail = TRUE)*2
+    p.value <- stats::pt(-abs(t), df, lower.tail = TRUE)*2
     p.value.compare = " not equal to "
 
   } else if (alternative == "less") {
     ll <- -Inf
-    ul <- x_mean + qt(conf.level, df)*x_std_err
+    ul <- x_mean + stats::qt(conf.level, df)*x_std_err
 
     #calculate p-value
-    p.value <- pt(t, df)
+    p.value <- stats::pt(t, df)
     p.value.compare <- " less than "
 
   } else {
-    ll <- x_mean - qt(conf.level, df)*x_std_err
+    ll <- x_mean - stats::qt(conf.level, df)*x_std_err
     ul <- Inf
 
     # calculate p-value
-    p.value <- pt(t, df, lower.tail = FALSE)
+    p.value <- stats::pt(t, df, lower.tail = FALSE)
     p.value.compare <- " greater than "
 
   }
