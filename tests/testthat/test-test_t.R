@@ -1,4 +1,12 @@
 test_that("test_t works", {
+
+  # testing length_cpp
+  expect_equal(length_cpp(1:10), 10)
+  # testing mean_cpp
+  expect_equal(mean_cpp(1:10), 5.5)
+  # testing sd_cpp
+  expect_equal(round(sd_cpp(1:10), 5), 3.02765)
+
   # vector of 1:10
   expect_equal(round(as.numeric(test_t(1:10)$statistic), 5), 5.74456)
   expect_equal(round(as.numeric(test_t(1:10)$p.value), 5), 0.00028)
