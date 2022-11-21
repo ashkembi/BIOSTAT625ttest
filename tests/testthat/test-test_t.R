@@ -1,5 +1,10 @@
 test_that("test_t works", {
 
+  # testing errors
+  expect_error(test_t(1:10, h0 = NA))
+  expect_error(test_t(1:10, h0 = c(1:10)))
+  expect_error(test_t(1))
+
   # testing length_cpp
   expect_equal(length_cpp(1:10), 10)
   # testing mean_cpp
